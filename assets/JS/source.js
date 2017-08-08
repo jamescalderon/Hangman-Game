@@ -1,36 +1,33 @@
-//get random word from http://setgetgo.com/randomword/get.php
+//get https word from API - generate random number and random letter to alter words returned
 
-//HTTP POST Request (Synchronous)
-// var xhr = new XMLHttpRequest();
-// xhr.open('GET', "http://setgetgo.com/randomword/get.php", false);
-// xhr.send();
+var categoryArray = ["robot", "machine", "automated", "computer", "humanoid", "bender", "mode", "animated", "mechanical", "programmed"];
 
-//get https word from API
+var randWord = Math.floor(Math.random() * categoryArray.length);
 
 
 
+// var jsonWordsObject = JSON.parse(wordJSON, (key, value));
+// console.log("jsonWordsObject: " + jsonWordsObject);
 
-var yourUrl = "https://api.datamuse.com/words?ml=robot&sp=ab*&max=10";
+
+var randN = randGen(0); //random number
+console.log("randN: " + randN);
+
+
+
+var randL = randGen(1); //random letter
+console.log("randL: " + randL);
+var yourUrl = "https://api.datamuse.com/words?ml=" + categoryArray[randWord] + "&sp=" + randL + "*&max=" + randN;
 var xhReq = new XMLHttpRequest();
 xhReq.open("GET", yourUrl, false);
 xhReq.send(null);
 var jsonObject = JSON.parse(xhReq.responseText);
-console.log(jsonObject[0].word);
-
-
-//if response is > 10 characters, go back and get another word until it is 10 or less
-// do {
-//     xhr = new XMLHttpRequest();
-//     xhr.open('GET', "http://setgetgo.com/randomword/get.php", false);
-//     xhr.send();
-//     // console.log("over: " + xhr.responseText.toLowerCase());
-
-// } while (xhr.responseText.length > 8);
-
+// console.log(jsonObject[randNN].word);
+var randNN = Math.floor(Math.random() * jsonObject.length); //generate number limited by JSON object's length (used to choose random word position within returned JSON query)
+console.log("randNN: " + randNN);
 var word = jsonObject[0].word;
 console.log(word);
-// xhr.responseText.toLowerCase(); //assign lower case word if correct
-// console.log("the word is : " + word);
+console.log(jsonObject);
 
 //assign to array of characters
 var wordArray = word.split('');
@@ -190,44 +187,21 @@ function letterLoop(arrayToSearch, arrayToReplace, key) {
     return count; //report back how many chars replaced
 }
 
-// function hangRobot(roboBits) {
-//     //this function changes main display and button text dynamically (robo bits added to gallows)
+function randGen(valIn) {
+    //retuens random letters/numbers (up to 26)
 
-//     if (roboBits == 5) {
-//         document.getElementById("top_image").innerHTML = '<img src="./assets/images/g1.svg" class="main_image" height="50%" width="50%">';
+    var chars = 'abcdefghijklmnopqrstuvwxyz';
+    var ch = Math.floor(Math.random() * chars.length);
 
-//         document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-success" id="button_text">5 robo bits left!</a>'
-//     }
 
-//     if (roboBits == 4) {
-//         document.getElementById("top_image").innerHTML = '<img src="./assets/images/g2.svg" class="main_image" height="50%" width="50%">';
+    if (valIn == 0) {
+        return ch; //return number
+    } else {
+        return chars[ch]; //return letter
+    }
+}
 
-//         document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-success" id="button_text">4 robo bits left!</a>'
-//     }
 
-//     if (roboBits == 3) {
-//         document.getElementById("top_image").innerHTML = '<img src="./assets/images/g3.svg" class="main_image" height="50%" width="50%">';
-
-//         document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-success" id="button_text">3 robo bits left!</a>'
-//     }
-
-//     if (roboBits == 2) {
-//         document.getElementById("top_image").innerHTML = '<img src="./assets/images/g4.svg" class="main_image" height="50%" width="50%">';
-
-//         document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-success" id="button_text">2 robo bits left!</a>'
-//     }
-
-//     if (roboBits == 1) {
-//         document.getElementById("top_image").innerHTML = '<img src="./assets/images/g5.svg" class="main_image" height="50%" width="50%">';
-
-//         document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-success" id="button_text">1 robo bits left!</a>'
-//     }
-
-//     if (roboBits == 0) { //if done - show robo on gallows
-//         document.getElementById("top_image").innerHTML = '<img src="./assets/images/g6.svg" class="main_image" height="50%" width="50%">';
-//     }
-
-// }
 
 function endWell(result) {
     if (result) {
