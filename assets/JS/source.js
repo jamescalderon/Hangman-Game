@@ -1,20 +1,35 @@
 //get random word from http://setgetgo.com/randomword/get.php
 
 //HTTP POST Request (Synchronous)
-var xhr = new XMLHttpRequest();
-xhr.open('GET', "http://setgetgo.com/randomword/get.php", false);
-xhr.send();
+// var xhr = new XMLHttpRequest();
+// xhr.open('GET', "http://setgetgo.com/randomword/get.php", false);
+// xhr.send();
+
+//get https word from API
+
+
+
+
+var yourUrl = "https://api.datamuse.com/words?ml=robot&sp=ab*&max=10";
+var xhReq = new XMLHttpRequest();
+xhReq.open("GET", yourUrl, false);
+xhReq.send(null);
+var jsonObject = JSON.parse(xhReq.responseText);
+console.log(jsonObject[0].word);
+
 
 //if response is > 10 characters, go back and get another word until it is 10 or less
-do {
-    xhr = new XMLHttpRequest();
-    xhr.open('GET', "http://setgetgo.com/randomword/get.php", false);
-    xhr.send();
-    // console.log("over: " + xhr.responseText.toLowerCase());
+// do {
+//     xhr = new XMLHttpRequest();
+//     xhr.open('GET', "http://setgetgo.com/randomword/get.php", false);
+//     xhr.send();
+//     // console.log("over: " + xhr.responseText.toLowerCase());
 
-} while (xhr.responseText.length > 8);
+// } while (xhr.responseText.length > 8);
 
-word = xhr.responseText.toLowerCase(); //assign lower case word if correct
+var word = jsonObject[0].word;
+console.log(word);
+// xhr.responseText.toLowerCase(); //assign lower case word if correct
 // console.log("the word is : " + word);
 
 //assign to array of characters
