@@ -15,7 +15,7 @@ do {
 } while (xhr.responseText.length > 8);
 
 word = xhr.responseText.toLowerCase(); //assign lower case word if correct
-console.log("the word is : " + word);
+// console.log("the word is : " + word);
 
 //assign to array of characters
 var wordArray = word.split('');
@@ -42,7 +42,7 @@ document.onkeyup = function(event) {
     var keyPressed = event.key.toLowerCase(); //lower case key
     var charsFound = 0;
 
-    console.log(keyPressed);
+    // console.log(keyPressed);
 
     //Actions if key not pressed before
     if (contains(lettersChosen, keyPressed) == 0 && gameDone == false) {
