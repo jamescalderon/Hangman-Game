@@ -2,6 +2,7 @@
 
 .main_image {
     filter: invert(100%);
+    max-width: 180px;
 }
 
 a,
@@ -23,7 +24,7 @@ a:hover {
     border: 1px solid #fff;
 }
 
-.text_middle {
+.middle {
     letter-spacing: 20px;
 }
 
@@ -37,6 +38,19 @@ body {
     height: 100%;
     background-color: #333;
     font-family: 'Roboto Mono', monospace;
+}
+
+#preload_images:before {
+    content: url("assets/images/g0.svg");
+    content: url("assets/images/g1.svg");
+    content: url("assets/images/g2.svg");
+    content: url("assets/images/g3.svg");
+    content: url("assets/images/g4.svg");
+    content: url("assets/images/g5.svg");
+    content: url("assets/images/g6.svg");
+    width: 0;
+    height: 0;
+    visibility: hidden;
 }
 
 body {
@@ -164,7 +178,7 @@ body {
         top: 0;
     }
     .mastfoot {
-        position: fixed;
+        position: absolute;
         bottom: 0;
     }
     /* Start the vertical centering */

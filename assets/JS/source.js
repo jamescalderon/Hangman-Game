@@ -29,7 +29,7 @@ var lettersChosen = []; //holds letters user has chosen
 var lettersMatched = []; //matched letters to display
 var wordDisplayed = ""
 var totCharactersLeft = wordArray.length; //set initial value
-var roboBitsLeft = 6; //total robo parts (to hang)
+var robopartsLeft = 6; //total robo parts (to hang)
 var gameDone = false; //used to flag game end
 
 //populate dashes in wordDisplayed and lettersMatched from wordArray
@@ -39,7 +39,7 @@ for (var index = 0; index < wordArray.length; index++) {
 }
 
 //initialize visual displays
-gameStatusDisplays(roboBitsLeft);
+gameStatusDisplays(robopartsLeft);
 
 //PLAY THE GAME
 
@@ -59,14 +59,14 @@ document.onkeyup = function(event) {
             lettersChosen.push(keyPressed); //add found letter
             totCharactersLeft -= charsFound; //deduct how many found from count
         } else { //if no chars found (wrong letter chosen)
-            //add robo body bit (remove 1 from available bits left)
-            roboBitsLeft--;
-            // hangRobot(roboBitsLeft); //punish robot
+            //add robo body part (remove 1 from available parts left)
+            robopartsLeft--;
+            // hangRobot(robopartsLeft); //punish robot
         }
 
         //Check for game end and act accordingly:
-        // - check for no more robo bits left (game lost)
-        if (roboBitsLeft == 0) {
+        // - check for no more robo parts left (game lost)
+        if (robopartsLeft == 0) {
             endWell(false); //trigger game lost 
         }
 
@@ -77,61 +77,65 @@ document.onkeyup = function(event) {
 
         // ( if here, game is still going )
 
-        //updates to display:
-        gameStatusDisplays(roboBitsLeft);
+
+        //updates to display (except last pass, once final dispays are rendered):
+        if (gameDone != true) {
+            gameStatusDisplays(robopartsLeft);
+        }
+
 
     } //end if
 
 }; //end of keyup
 
 //CUSTOM FUNCTIONS
-function gameStatusDisplays(roboBits) {
+function gameStatusDisplays(roboparts) {
 
     //this function displays the changes dynamically
-    if (roboBits == 6) {
-        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g0.svg" class="main_image" height="50%" width="50%">';
+    if (roboparts == 6) {
+        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g0.svg" class="main_image" >';
 
         //green button
-        document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-success" disabled="disabled" id="button_text">6 robo bits left!</a>'
+        document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-success" disabled="disabled" id="button_text">6 robo parts left!</a>'
     }
 
-    if (roboBits == 5) {
-        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g1.svg" class="main_image" height="50%" width="50%">';
+    if (roboparts == 5) {
+        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g1.svg" class="main_image" >';
 
         //green button
-        document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-success" disabled="disabled" id="button_text">5 robo bits left!</a>'
+        document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-success" disabled="disabled" id="button_text">5 robo parts left!</a>'
     }
 
-    if (roboBits == 4) {
-        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g2.svg" class="main_image" height="50%" width="50%">';
+    if (roboparts == 4) {
+        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g2.svg" class="main_image" >';
 
         //yellow button
-        document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-warning" disabled="disabled" id="button_text">4 robo bits left!</a>'
+        document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-warning" disabled="disabled" id="button_text">4 robo parts left!</a>'
     }
 
-    if (roboBits == 3) {
-        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g3.svg" class="main_image" height="50%" width="50%">';
+    if (roboparts == 3) {
+        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g3.svg" class="main_image" >';
 
         //yellow button
-        document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-warning" disabled="disabled" id="button_text">3 robo bits left!</a>'
+        document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-warning" disabled="disabled" id="button_text">3 robo parts left!</a>'
     }
 
-    if (roboBits == 2) {
-        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g4.svg" class="main_image" height="50%" width="50%">';
+    if (roboparts == 2) {
+        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g4.svg" class="main_image" >';
 
         //red button
-        document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-danger" disabled="disabled" id="button_text">2 robo bits left!</a>'
+        document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-danger" disabled="disabled" id="button_text">2 robo parts left!</a>'
     }
 
-    if (roboBits == 1) {
-        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g5.svg" class="main_image" height="50%" width="50%">';
+    if (roboparts == 1) {
+        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g5.svg" class="main_image" >';
 
         //red button
-        document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-danger" disabled="disabled" id="button_text">1 robo bits left!</a>'
+        document.getElementById("button").innerHTML = '<a class="btn btn-lg active btn-danger" disabled="disabled" id="button_text">1 robo parts left!</a>'
     }
 
-    if (roboBits == 0) { //if done - show robo on gallows
-        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g6.svg" class="main_image" height="50%" width="50%">';
+    if (roboparts == 0) { //if done - show robo on gallows
+        document.getElementById("top_image").innerHTML = '<img src="./assets/images/g6.svg" class="main_image" >';
 
         //button final display in endWell function
     }
@@ -196,14 +200,17 @@ function randGen(valIn) {
 
 function endWell(result) {
     if (result) {
+
         //if true - game won
-        document.getElementById("top_image").innerHTML = '<img src="./assets/images/robo_alive.svg" class="main_image" height="50%" width="50%">'; //if done - show robo alive face
+        document.getElementById("top_image").innerHTML = '<img src="./assets/images/robo_alive.svg" class="main_image" >'; //if done - show robo alive face
 
         document.getElementById("top_text").innerHTML = "It's alive - ALIVE!"; // display robo's status
 
         document.getElementById("text_middle").innerHTML = wordArray.join(''); //display  word
 
         document.getElementById("text_bottom").innerHTML = ""; // clear bottom text
+
+
 
 
     } else {
@@ -218,6 +225,9 @@ function endWell(result) {
 
     //change button to reset
     document.getElementById("button").innerHTML = ' <a href="game.html" class="btn btn-lg active btn-primary" >PLAY AGAIN</a>'
+
+    gameDone = true; //set flag
+
 }
 
 //testing functions
