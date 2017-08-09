@@ -1,18 +1,7 @@
-/*
- * Globals
- font-family: 'Roboto Mono', monospace;
- */
-
-
-/* Links */
-
-
 /*CUSTOM  */
 
 .main_image {
-    /* -webkit-filter: invert(100%); */
     filter: invert(100%);
-    /* width: 25%; */
 }
 
 a,

@@ -1,10 +1,9 @@
-//get https word from API - generate random number and random letter to alter words returned
-
-var categoryArray = ["robot", "machine", "automated", "computer", "humanoid", "bender", "mode", "animated", "mechanical", "programmed"];
+//main word array
+var categoryArray = ["robot", "machine", "automated", "computer", "humanoid", "bender", "mode", "animated", "mechanical", "programmed", "can", "automaton", "sonny", "dumb", "technology", "future"];
 var randWord = Math.floor(Math.random() * categoryArray.length);
 var word = categoryArray[randWord];
-//  - (begin stubbed code) - 
-//random word enerator - will enable at later date
+
+//  - (begin stubbed code) - random word generator from API - will enable at later date
 
 // var randN = randGen(0); //random number
 // var randL = randGen(1); //random letter
@@ -21,7 +20,8 @@ var word = categoryArray[randWord];
 
 //  - (end stubbed code) - 
 
-console.log("word: " + word);
+//enable to see word in console
+//console.log("word: " + word);
 
 //assign to array of characters
 var wordArray = word.split('');
@@ -176,13 +176,12 @@ function letterLoop(arrayToSearch, arrayToReplace, key) {
             count++; //+1
         }
     }
-    // printArray(arrayToSearch);
-    // printArray(arrayToReplace);
+
     return count; //report back how many chars replaced
 }
 
 function randGen(valIn) {
-    //retuens random letters/numbers (up to 26)
+    //returns random letters/numbers (up to 26)
 
     var chars = 'abcdefghijklmnopqrstuvwxyz';
     var ch = Math.floor(Math.random() * chars.length);
@@ -194,8 +193,6 @@ function randGen(valIn) {
         return chars[ch]; //return letter
     }
 }
-
-
 
 function endWell(result) {
     if (result) {
