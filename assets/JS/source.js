@@ -1,33 +1,27 @@
 //get https word from API - generate random number and random letter to alter words returned
 
 var categoryArray = ["robot", "machine", "automated", "computer", "humanoid", "bender", "mode", "animated", "mechanical", "programmed"];
-
 var randWord = Math.floor(Math.random() * categoryArray.length);
+var word = categoryArray[randWord];
+//  - (begin stubbed code) - 
+//random word enerator - will enable at later date
 
+// var randN = randGen(0); //random number
+// var randL = randGen(1); //random letter
 
+// var yourUrl = "https://api.datamuse.com/words?ml=" + categoryArray[randWord] + "&sp=" + randL + "*&max=" + randN;
 
-// var jsonWordsObject = JSON.parse(wordJSON, (key, value));
-// console.log("jsonWordsObject: " + jsonWordsObject);
+//URL call
+// var xhReq = new XMLHttpRequest();
+// xhReq.open("GET", yourUrl, false);
+// xhReq.send(null);
+// var jsonObject = JSON.parse(xhReq.responseText);
+// var word = jsonObject[0].word; //word from URL call
+//var randNN = Math.floor(Math.random() * jsonObject.length); //generate number limited by JSON object's length (used to choose random word position within returned JSON query)
 
+//  - (end stubbed code) - 
 
-var randN = randGen(0); //random number
-console.log("randN: " + randN);
-
-
-
-var randL = randGen(1); //random letter
-console.log("randL: " + randL);
-var yourUrl = "https://api.datamuse.com/words?ml=" + categoryArray[randWord] + "&sp=" + randL + "*&max=" + randN;
-var xhReq = new XMLHttpRequest();
-xhReq.open("GET", yourUrl, false);
-xhReq.send(null);
-var jsonObject = JSON.parse(xhReq.responseText);
-// console.log(jsonObject[randNN].word);
-var randNN = Math.floor(Math.random() * jsonObject.length); //generate number limited by JSON object's length (used to choose random word position within returned JSON query)
-console.log("randNN: " + randNN);
-var word = jsonObject[0].word;
-console.log(word);
-console.log(jsonObject);
+console.log("word: " + word);
 
 //assign to array of characters
 var wordArray = word.split('');
