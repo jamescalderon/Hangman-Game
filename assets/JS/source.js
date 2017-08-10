@@ -1,4 +1,7 @@
-//main word array
+//JavaScript file for Robo Hangman
+//Written by James Calderon (jamescalderon.com)
+
+//Main word array
 var categoryArray = ["robot", "machine", "automated", "computer", "humanoid", "bender", "mode", "animated", "mechanical", "programmed", "can", "automaton", "sonny", "dumb", "technology", "future"];
 var randWord = Math.floor(Math.random() * categoryArray.length);
 var word = categoryArray[randWord];
@@ -48,8 +51,6 @@ document.onkeyup = function(event) {
     var keyPressed = event.key.toLowerCase(); //lower case key
     var charsFound = 0;
 
-    // console.log(keyPressed);
-
     //Actions if key not pressed before
     if (contains(lettersChosen, keyPressed) == 0 && gameDone == false) {
         charsFound = letterLoop(wordArray, lettersMatched, keyPressed); //find/replace chars in string if they match
@@ -58,34 +59,30 @@ document.onkeyup = function(event) {
         if (charsFound > 0) { //if chars found (right letter chosen)
             lettersChosen.push(keyPressed); //add found letter
             totCharactersLeft -= charsFound; //deduct how many found from count
+
         } else { //if no chars found (wrong letter chosen)
             //add robo body part (remove 1 from available parts left)
             robopartsLeft--;
-            // hangRobot(robopartsLeft); //punish robot
         }
 
         //Check for game end and act accordingly:
         // - check for no more robo parts left (game lost)
         if (robopartsLeft == 0) {
+            gameDone = true; //set flag
             endWell(false); //trigger game lost 
         }
 
         // - check for no more letters left (game won)
         if (totCharactersLeft == 0) {
+            gameDone = true; //set flag
             endWell(true); //trigger game won
         }
-
-        // ( if here, game is still going )
-
 
         //updates to display (except last pass, once final dispays are rendered):
         if (gameDone != true) {
             gameStatusDisplays(robopartsLeft);
         }
-
-
     } //end if
-
 }; //end of keyup
 
 //CUSTOM FUNCTIONS
@@ -141,12 +138,10 @@ function gameStatusDisplays(roboparts) {
     }
 
     //general updates:
-
     wordDisplayed = lettersMatched.join(""); //update word displayed
     document.getElementById("text_middle").innerHTML = wordDisplayed; // display updated word
 
     document.getElementById("text_bottom").innerHTML = "( total characters left: " + totCharactersLeft + " )"; // display how many characters are left in word
-
 }
 
 function contains(arrIn, keyIn) {
@@ -190,7 +185,6 @@ function randGen(valIn) {
     var chars = 'abcdefghijklmnopqrstuvwxyz';
     var ch = Math.floor(Math.random() * chars.length);
 
-
     if (valIn == 0) {
         return ch; //return number
     } else {
@@ -210,9 +204,6 @@ function endWell(result) {
 
         document.getElementById("text_bottom").innerHTML = ""; // clear bottom text
 
-
-
-
     } else {
         //if false - game lost
         document.getElementById("top_text").innerHTML = "It's D-E-D!"; // display robo's status
@@ -224,10 +215,7 @@ function endWell(result) {
     gameDone = true; //done with game - set flag
 
     //change button to reset
-    document.getElementById("button").innerHTML = ' <a href="game.html" class="btn btn-lg active btn-primary" >PLAY AGAIN</a>'
-
-    gameDone = true; //set flag
-
+    document.getElementById("button").innerHTML = ' <a href="game.html" class="btn btn-lg active btn-primary">PLAY AGAIN</a>'
 }
 
 //testing functions
@@ -236,7 +224,6 @@ function printArray(array) {
     var s = "";
     for (var index = 0; index < array.length; index++) {
         s += array[index];
-
     }
     console.log("printed array: " + s);
 }
